@@ -1,22 +1,45 @@
 #include <iostream> 
 #include <queue>
-using namespace std;
 
- class Ckn {
- private: int M[][];
- public: int C( int k , int n ){
- if(k == 0 || k == n ) M[ k ][ n ] = 1;
- else if(M [k ][ n] < 0){
- M[k ][ n] = C(k -1 ,n -1) + C(k ,n -1);
- }
-return M[k ][ n ];
- }
-  void test (){
- M = new int [100][100];
- for ( int i = 0; i < 100; i ++)
- for ( int j = 0; j < 100; j ++)
- M[ i ][ j ] = -1;
+const int N=3,M=10;
+int A[N]={-1};
+int M_tren=-1,M_duoi=-1,m=-1,f=-1,scout=-1,i=-1;
 
- System . out . println (C (15 ,30));
- }
- }
+void print(int k)
+{
+  for(k=0;k<N;k++)
+  std::cout<<A[k]<<" ";
+  std::cout<<scout;
+}
+
+void TRY(int i)
+{
+  
+if(i==N)
+  {
+    M_tren=M_duoi=M-f;
+  }
+  else 
+  {
+    M_tren=M-f-(N-i);
+    M_duoi=1;
+  }
+  for(int v=M_duoi;v<=M_tren;v++)
+    {
+      A[i]=v;
+      f+=v;
+      if(i==N) 
+      {
+        print(v);
+        scout++;
+      }
+      else TRY(i+1);
+      f-=v;
+    }
+}
+
+int main()
+{
+  TRY(3);
+  return 0;
+}
